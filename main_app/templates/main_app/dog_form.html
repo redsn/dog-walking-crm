@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if object %}
+<h1>Edit Dog: {{object.name}}</h1>
+{% else %}
+<h1>Add new Dog</h1>
+{% endif %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        asdfasdfasd
+        {{form.as_table}}
+    </table>
+    <input type="submit" value="Add Dog">
+</form>
+
+{% endblock %}
