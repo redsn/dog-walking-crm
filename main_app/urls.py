@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -10,4 +11,5 @@ urlpatterns = [
     path('dogs/<int:pk>/update/', views.DogUpdate.as_view(), name='dog_update'),
     path('dogs/<int:pk>/delete/', views.DogDelete.as_view(), name='dog_delete'),
     path('dogs/<int:dog_id>/add_activity/',views.add_activity, name='add_activity'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
