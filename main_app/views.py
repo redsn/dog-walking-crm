@@ -22,10 +22,10 @@ def add_activity(request):
 
 class DogCreate(CreateView):
     model = Dog
-    fields = ('name', 'breed')
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     return super().form_valid(form)
+    fields = ('name', 'breed', 'coatcolor', 'notes', 'ownername', 'ownerphone', 'owneraddress')
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class DogUpdate(UpdateView):
     model = Dog
