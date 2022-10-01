@@ -10,15 +10,6 @@ from django.contrib.auth.models import User
 MAIN MODELS
 ================
 """
-class Walker(models.Model):
-    ## Walker/User contact
-    name= models.CharField(max_length=20)
-    email= models.CharField(max_length=30)
-    ##### Walker/User phone number. **** Typing and content may change with call functionality
-    phone= models.CharField(max_length=12)
-
-    def __str__(self):
-        return f'{self.name}\'s contacts. Email: {self.email}, Phone: {self.phone}'
 
 class Dog(models.Model):
     ## Dog Description
@@ -32,7 +23,7 @@ class Dog(models.Model):
          ### Should ownerADDRESS be changed to TextField?  ****
     owneraddress= models.CharField(max_length=100)
     ## user/walker FK
-    user= models.ForeignKey(Walker, on_delete=models.CASCADE)
+    user= models.ForeignKey(User, on_delete=models.CASCADE)
 
     """
     ManyToMany field not defined yet
