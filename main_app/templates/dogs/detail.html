@@ -1,5 +1,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>details</p>
+<div>
+    <h1>{{dog.name}}</h1>
+    <div>
+        <p>{{dog.breed}}</p>
+        <p>{{dog.coatcolor}}</p>
+    </div>
+    <div>
+        <h3>Notes</h3>
+        <div>
+            {{dog.notes}}
+        </div>
+    </div>
+    <div>
+        <h3>Owner Contact</h3>
+        <div>
+            <p>Name: {{dog.ownername}}</p>
+            <p>Phone: {{dog.ownerphone}}</p>
+            <p>Address: {{dog.owneraddress}}</p>
+        </div>
+    </div>
+</div>
+<hr>
+<div>
+    <h1>Activites</h1>
+    <form action="{% url 'add_activity' dog.id %}" method="POST">
+        {% csrf_token %}
+        {{ activity_form.as_p }}
+        <input type="submit" value="Add Activity" class="btn">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Activity
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for activity in dog.activity_set.all %}
+            <tr>
+                <td>{{ activity.date }}</td>
+                <td>{{ activity.activity}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
