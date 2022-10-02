@@ -13,7 +13,7 @@ def home(request):
     return render(request, 'home.html')
 
 def about(request):
-    pass
+    return render(request, 'about.html')
 
 def dogs_index(request):
     ## Change this to .filter(userid) when needed
