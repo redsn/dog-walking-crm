@@ -5,7 +5,6 @@ from .models import Dog
 from .models import Activity
 from .models import DogPhoto
 from .models import ActivityPhoto
-from .models import User
 
 admin.site.register(ActivityPhoto)
 admin.site.register(Dog)
