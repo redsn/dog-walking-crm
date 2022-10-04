@@ -15,24 +15,24 @@
     <title>WagTracker</title>
 </head>
 <body>
-<div class="wrapper">
-    <div class="sidebar">
-        <h4>WagTracker</h4>
-        <ul>
-            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="{% url 'about' %}"><i class="fas fa-address-card"></i>About</a></li>
-            <li><a href="{% url 'dog_index' %}"><i class="fas fa-dog"></i>My Dogs</a></li>
-            <li><a href=""><i class="fas fa-user"></i>Profile</a></li>
-            <li><button><a href="{% url 'dog_create' %}">Add Dogs</a></button></li>
-            <li><button><a href="{% url 'signup' %}">Sign Up</a></button></li>
-            <li><button><a href="{% url 'login' %}">Log In</a></button></li>
-        </ul> 
-    </div>
-    <div class="main_content">
-        <div class="info">
-            {% block content %} {% endblock %}
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="{% url 'home' %}" style="text-decoration: none"><h4>wagtracker</h4></a>
+            <ul>
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="{% url 'about' %}"><i class="fas fa-address-card"></i>About</a></li>
+                <li><a href="{% url 'dog_index' %}"><i class="fas fa-dog"></i>My Dogs</a></li>
+                <li><a href=""><i class="fas fa-user"></i>Profile</a></li>
+                <li><button class='yellow lighten-2'><a href="{% url 'dog_create' %}" class="black-text text-darken-2">Add Dogs</a></button></li>
+                <li><button class='yellow lighten-2'><a href="{% url 'signup' %}" class="black-text text-darken-2">Sign Up</a></button></li>
+                <li><button class='yellow lighten-2'><a href="{% url 'login' %}" class="black-text text-darken-2">Log In</a></button></li>
+            </ul> 
+        </div>
+        <div class="main_content">
+            <div class="info">
+                {% block content %} {% endblock %}
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
