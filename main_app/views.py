@@ -17,6 +17,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def landing(request):
+    return render(request, 'landing.html')
+
 @login_required
 def dogs_index(request):
     ## Change this to .filter(userid) when needed
