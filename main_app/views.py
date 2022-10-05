@@ -3,6 +3,7 @@ from .models import Dog, Activity
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from .forms import ActivityForm
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -12,16 +13,26 @@ def home(request):
     return render(request, 'home.html')
 
 def about(request):
-    pass
+    return render(request, 'about.html')
 
 def dogs_index(request):
-    pass
+    ## Change this to .filter(userid) when needed
+    dogs = Dog.objects.filter()
+    return render(request, 'dogs/index.html', {'dogs': dogs})
 
-def dogs_detail(request):
-    pass
 
-def add_activity(request):
-    pass
+def dogs_detail(request, dog_id):
+    dog = Dog.objects.get(id=dog_id)
+    activity_form = ActivityForm()
+    return render(request, 'dogs/detail.html', {'dog': dog, 'activity_form': activity_form})
+
+def add_activity(request, dog_id):
+    form = ActivityForm(request.POST)
+    if form.is_valid():
+        new_activity = form.save(commit=False)
+        new_activity.dog_id = dog_id
+        new_activity.save()
+    return redirect('dog_detail', dog_id=dog_id)
 
 def signup(request):
     error_message = ''

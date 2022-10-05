@@ -10,4 +10,3 @@ admin.site.register(ActivityPhoto)
 admin.site.register(Dog)
 admin.site.register(Activity)
 admin.site.register(DogPhoto)
-
