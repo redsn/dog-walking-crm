@@ -47,6 +47,10 @@ def dogs_detail(request, dog_id):
     return render(request, 'dogs/detail.html', {'dog': dog, 'activity_form': activity_form})
 
 @login_required
+def profile(request):
+    return render(request, 'users/profile.html')
+
+@login_required
 def add_activity(request, dog_id):
     form = ActivityForm(request.POST)
     if form.is_valid():
