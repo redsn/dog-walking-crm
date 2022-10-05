@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import ActivityForm
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+import uuid
+import boto3
 
 # Create your views here.
 
@@ -47,6 +49,9 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def add_dog_photo(request):
+    pass
 
 class DogCreate(CreateView):
     model = Dog
