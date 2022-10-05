@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Dog, Activity
+from .models import Dog, Activity, DogPhoto
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -8,6 +8,9 @@ from .forms import ActivityForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import uuid
 import boto3
+
+S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
+BUCKET = 'sei426-dog-walker-bucket-photo'
 
 # Create your views here.
 
@@ -50,8 +53,21 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-def add_dog_photo(request):
-    pass
+## Meant for a general photo upload. May need to configure settings for 'main' profile picture
+def add_dog_photo(request, dog_id):
+    photo_file= request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        ## key = name mod for file. 
+        key = photo_file.name[:photo_file[photo_file.name.rfind('.')]] + uuid.uuid4().hex[:6] + photo_file.name[photo_file[photo_file.name.rfind('.'):]]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = DogPhoto(url=url, dog_id=dog_id)
+            photo.save()
+        except:
+            print('Error on upload to s3')
+    return redirect('dog_detail', dog_id=dog_id)
 
 class DogCreate(CreateView):
     model = Dog

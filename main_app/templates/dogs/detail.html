@@ -8,6 +8,23 @@
         <p>{{dog.coatcolor}}</p>
     </div>
     <div>
+        {% for dogphoto in dog.dogphoto_set.all %}
+        <img src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
+        {% empty %}
+        <div>This dog currently has no pictures</div>
+        {% endfor %}
+
+        <form 
+            action="{% url 'add_dog_photo' dog.id %}"
+            enctype="multipart/form-data"
+            method="POST"
+        >
+            {% csrf_token %}
+            <input type="file" name="photo_file">
+            <input type="submit" value="Upload Dog Photo">
+        </form>
+    </div>
+    <div>
         <h3>Notes</h3>
         <div>
             {{dog.notes}}
