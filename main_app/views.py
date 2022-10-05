@@ -15,6 +15,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def landing(request):
+    return render(request, 'landing.html')
+
 def dogs_index(request):
     ## Change this to .filter(userid) when needed
     dogs = Dog.objects.filter()
