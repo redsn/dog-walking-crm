@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>wagtracker</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper grey darken-4">
+          <a href="" class="brand-logo center">wagtracker</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+            <li><a class="grey lighten-5 btn-small black-text" href="{% url 'signup' %}"><i class="material-icons left">pets</i>Get Started</a></li>
+          </ul>
+        </div>
+      </nav>
+    </br>
+    </br>
+    <div class="container center">
+        <img src="https://m.media-amazon.com/images/I/711O6Y9iFjL._AC_SL1500_.jpg" alt="big doggo" width="70%">
+    </div>
+    <div class="container z-depth-1 grey darken-4">
+      <div class="row center">
+      </br>
+            <div class="col s4">
+                <i class="material-icons medium white-text">pets</i>
+                </br>
+                <h5 class="center yellow-text">Customer Focused</h5>
+                <h6 class="white-text">Tracking of Crucial Customer Information to Best Support Positive Customer Interactions.</h6>
+            </div>
+            <div class="col s4">
+                <i class="material-icons medium white-text">people</i>
+                </br>
+                <h5 class="center yellow-text">Easy to Use Interface</h5>
+                <h6 class="white-text">Intuitive User Interface Facilitating Simple and Efficient User Interactions.</h6>
+            </div>
+            <div class="col s4">
+                <i class="material-icons medium white-text">business</i>
+                </br>
+                <h5 class="center yellow-text">Built For Small Businesses</h5>
+                <h6 class="white-text">Various Built-In Features Customized for Small Business Utilization.</h6>
+            </div>
+        </div>  
+    </div>
+    
+</body>
+</html>
