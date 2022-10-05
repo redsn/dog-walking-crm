@@ -1,3 +1,4 @@
+import re
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
@@ -11,14 +12,18 @@ from .models import Activity, Dog
 
 # Create your views here.
 
-def home(request):
-    return render(request, 'home.html')
-
 def about(request):
     return render(request, 'about.html')
 
 def landing(request):
-    return render(request, 'landing.html')
+    if request.user.is_authenticated: 
+        return render(request, 'home.html')
+    else: 
+        return render(request, 'landing.html')
+
+@login_required
+def home(request):
+    return render(request, 'home.html')
 
 @login_required
 def dogs_index(request):
