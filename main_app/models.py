@@ -13,15 +13,15 @@ MAIN MODELS
 
 class Dog(models.Model):
     ## Dog Description
-    name= models.CharField(max_length=20)
-    breed= models.CharField(max_length=20)
-    coatcolor= models.CharField(max_length=15)
-    notes= models.TextField(max_length=250)
+    name= models.CharField(max_length=20, verbose_name=('Name'))
+    breed= models.CharField(max_length=20, verbose_name=('Breed'))
+    coatcolor= models.CharField(max_length=15, verbose_name=('Coat Color'))
+    notes= models.TextField(max_length=250, verbose_name=('Notes'))
     ## Owner contact
-    ownername= models.CharField(max_length=20)
-    ownerphone= models.CharField(max_length=12)
+    ownername= models.CharField(max_length=20, verbose_name=('Owner Name'))
+    ownerphone= models.CharField(max_length=12, verbose_name=('Owner Phone'))
          ### Should ownerADDRESS be changed to TextField?  ****
-    owneraddress= models.CharField(max_length=100)
+    owneraddress= models.CharField(max_length=100, verbose_name=('Owner Address'))
     ## user/walker FK
     user= models.ForeignKey(User, on_delete=models.CASCADE)
 
