@@ -24,7 +24,7 @@
 </div>
 <hr>
 <div>
-    <h1>Activites</h1>
+    <h1>Activities</h1>
     <form action="{% url 'add_activity' dog.id %}" method="POST">
         {% csrf_token %}
         {{ activity_form.as_p }}
