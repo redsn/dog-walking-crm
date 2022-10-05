@@ -20,11 +20,11 @@
     <div class="sidebar">
         <h4>WagTracker</h4>
         <ul>
-            <li><a href=""><i class="fas fa-home"></i>Home</a></li>
-            <li><a href=""><i class="fas fa-address-card"></i>About</a></li>
-            <li><a href=""><i class="fas fa-dog"></i>Dogs</a></li>
+            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="{% url 'about' %}"><i class="fas fa-address-card"></i>About</a></li>
+            <li><a href="{% url 'dog_index' %}"><i class="fas fa-dog"></i>Dogs</a></li>
             <li><a href=""><i class="fas fa-user"></i>Profile</a></li>
-            <li><button><a href="#">Add Dogs</a></button></li>
+            <li><button><a href="{% url 'dog_create' %}">Add Dogs</a></button></li>
             <li><button><a href="#">Add Activities</a></button></li>
         </ul> 
     </div>
