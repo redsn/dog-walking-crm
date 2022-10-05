@@ -1,8 +1,7 @@
 
 from django.shortcuts import render, redirect
-from .models import Dog, Activity, DogPhoto
+from .models import Dog, DogPhoto, ActivityPhoto
 from django.views.generic import ListView, DetailView
-import re
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
@@ -84,6 +83,20 @@ def add_dog_photo(request, dog_id):
             photo.save()
         except Exception as error:
             print(f'error @ upload: {error}')
+    return redirect('dog_detail', dog_id=dog_id)
+
+def add_activity_photo(request, activity_id, dog_id):
+    activity_photo = request.FILES.get('activity-photo')
+    if activity_photo:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:12] + activity_photo.name[activity_photo.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(activity_photo, BUCKET, key)
+            url = f'{S3_BASE_URL}{BUCKET}/{key}'
+            photo = ActivityPhoto(url=url, activity_id=activity_id)
+            photo.save()
+        except Exception as error:
+            print(f'Error occured while uploading')
     return redirect('dog_detail', dog_id=dog_id)
 
 class DogCreate(LoginRequiredMixin, CreateView):
