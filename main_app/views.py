@@ -53,20 +53,20 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-## Meant for a general photo upload. May need to configure settings for 'main' profile picture
+# Meant for a general photo upload. May need to configure settings for 'main' profile picture
 def add_dog_photo(request, dog_id):
-    photo_file= request.FILES.get('photo-file', None)
+    photo_file = request.FILES.get('photo_file')
     if photo_file:
         s3 = boto3.client('s3')
         ## key = name mod for file. 
-        key = photo_file.name[:photo_file[photo_file.name.rfind('.')]] + uuid.uuid4().hex[:6] + photo_file.name[photo_file[photo_file.name.rfind('.'):]]
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
-            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            url = f'{S3_BASE_URL}{BUCKET}/{key}'
             photo = DogPhoto(url=url, dog_id=dog_id)
             photo.save()
-        except:
-            print('Error on upload to s3')
+        except Exception as error:
+            print(f'error @ upload: {error}')
     return redirect('dog_detail', dog_id=dog_id)
 
 class DogCreate(CreateView):

@@ -14,13 +14,10 @@
         <div>This dog currently has no pictures</div>
         {% endfor %}
 
-        <form 
-            action="{% url 'add_dog_photo' dog.id %}"
-            enctype="multipart/form-data"
-            method="POST"
-        >
+        <form action="{% url 'add_dog_photo' dog.id %}" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
-            <input type="file" name="photo_file">
+            <input type="file" name="photo_file" />
+            <br/>
             <input type="submit" value="Upload Dog Photo">
         </form>
     </div>
