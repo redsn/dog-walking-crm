@@ -1,6 +1,7 @@
 
+from distutils.log import Log
 from django.shortcuts import render, redirect
-from .models import Dog, DogPhoto, ActivityPhoto
+from .models import Dog, DogPhoto, ActivityPhoto, Activity
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -118,4 +119,6 @@ class DogDelete(LoginRequiredMixin, DeleteView):
     model = Dog
     success_url = '/dogs/'
 
-
+class ActivityDelete(LoginRequiredMixin, DeleteView):
+    model = Activity
+    success_url = '/dogs/'
