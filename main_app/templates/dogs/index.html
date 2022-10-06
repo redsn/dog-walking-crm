@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Dogs</h1>
-
-{% for dog in dogs %}
-<a href="/dogs/{{dog.id}}">
-    <div>
-        <div>
-            <h3>{{dog.name}}</h3>
-            <p>{{dog.breed}}</p>
-            <p>{{dog.coatcolor}}</p>
-        </div>
-    </div>
-</a>
-{% endfor %}
+<h3 class="black-text center-align">My Dogs</h3>
+<table class="striped centered black-text">
+    <thead>
+      <tr>
+          <th><h6>Dog Name</h6></th>
+          <th><h6>Breed</h6></th>
+          <th><h6>Coat Color</h6></th>
+          <th><h6>Parent</h6></th>
+          <th><h6>Contact Number</h6></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for dog in dogs %}
+      <tr>
+        <td><h6 class="text-bold"><a href="/dogs/{{dog.id}}">{{dog.name}}</a></h6></td>
+        <td><h6>{{dog.breed}}</h6></td>
+        <td><h6>{{dog.coatcolor}}</h6></td>
+        <td><h6>{{dog.ownername}}</h6></td>
+        <td><h6>{{dog.ownerphone}}</h6></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
