@@ -53,6 +53,9 @@
                 <th>
                     Activity
                 </th>
+                <th>
+                    Photo
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +63,20 @@
             <tr>
                 <td>{{ activity.date }}</td>
                 <td>{{ activity.activity}}</td>
+                <td>
+                    <div>
+                        {% for photo in activity.activityphoto_set.all %}
+                        <img src="{{photo.url}}" alt="">
+                        {% empty %}
+                        <div>This activity has no pictures...</div>
+                        <form action="{% url 'add_activity_photo' activity.id dog.id%}" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            <input type="file" name="activity-photo" />
+                            <input type="submit" value="Add Photo">
+                        </form>
+                        {% endfor %}
+                    </div>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
