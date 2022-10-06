@@ -24,7 +24,7 @@
                 <li><a href="{% url 'about' %}"><i class="fas fa-address-card"></i>About</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'dog_index' %}"><i class="fas fa-dog"></i>My Dogs</a></li>
-                <li><a href=""><i class="fas fa-user"></i>Profile</a></li>
+                <li><a href="{% url 'user-profile' %}"><i class="fas fa-user"></i>Profile</a></li>
                 <li><button class='yellow lighten-2'><a href="{% url 'dog_create' %}" class="black-text text-darken-2">Add Dogs</a></button></li>
                 <li><button class='yellow lighten-2'><a href="{% url 'logout' %}" class="black-text text-darken-2">Logout</a></button></li>
                 {% else %}
