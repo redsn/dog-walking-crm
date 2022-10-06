@@ -3,6 +3,7 @@
 {% block content %}
 <div>
     <h1>{{dog.name}}</h1>
+    <a href="{% url 'dog_update' dog.id %}">Edit this Dog PLACEHOLDER</a>
     <div>
         <p>{{dog.breed}}</p>
         <p>{{dog.coatcolor}}</p>
