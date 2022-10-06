@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>User Profile</h1>
-  <h2>User Name: {{user.username}}</h2>
-  <h2>Date Joined: {{ user.date_joined }}</h2>
-  <h2>Email: {{ user.email }}</h2>
+<h1 class="text-bold"></h1>
+<div>
+  <h1>Walker Profile</h1>
+  <h1>{{user.username}}</h1>
+      <h3>Contact Info</h3>
+      <div>
+          <p>Name: {{user.first_name}} {{ user.last_name }}</p>
+          <p>Email: {{user.email}}</p>
+      </div>
+  </div>
+</div>
 {% endblock %}
