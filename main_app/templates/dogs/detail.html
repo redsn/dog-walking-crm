@@ -56,6 +56,9 @@
                 <th>
                     Photo
                 </th>
+                <th>
+                    Modify Data
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -76,6 +79,9 @@
                         </form>
                         {% endfor %}
                     </div>
+                </td>
+                <td>
+                    <a href="{% url 'activity_delete' activity.id %}">Delete</a>
                 </td>
             </tr>
             {% endfor %}
