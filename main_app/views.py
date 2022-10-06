@@ -10,7 +10,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import ActivityForm
+from .forms import ActivityForm, SignUpForm
 
 import uuid
 import boto3
@@ -62,14 +62,14 @@ def add_activity(request, dog_id):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
         else: 
             error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
+    form = SignUpForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
