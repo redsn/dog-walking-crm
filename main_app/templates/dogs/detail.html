@@ -3,11 +3,12 @@
 {% block content %}
 <div>
     <h1>{{dog.name}}</h1>
+    <a href="{% url 'dog_update' dog.id %}">Edit this Dog PLACEHOLDER</a>
     <div>
         <p>{{dog.breed}}</p>
         <p>{{dog.coatcolor}}</p>
     </div>
-    <div>
+    <!-- <div>
         {% for dogphoto in dog.dogphoto_set.all %}
         <img src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
         {% empty %}
@@ -20,6 +21,20 @@
             <br/>
             <input type="submit" value="Upload Dog Photo">
         </form>
+    </div> -->
+    <div>
+        {% for dogphoto in dog.dogphoto_set.all %}
+        <img src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
+        {% empty %}
+        <div>This dog currently has no pictures</div>
+        <form action="{% url 'add_dog_photo' dog.id %}" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <input type="file" name="photo_file" />
+            <br/>
+            <input type="submit" value="Upload Dog Photo">
+        </form>
+        {% endfor %}
+
     </div>
     <div>
         <h3>Notes</h3>
@@ -56,6 +71,9 @@
                 <th>
                     Photo
                 </th>
+                <th>
+                    Modify Data
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -76,6 +94,9 @@
                         </form>
                         {% endfor %}
                     </div>
+                </td>
+                <td>
+                    <a href="{% url 'activity_delete' activity.id %}">Delete</a>
                 </td>
             </tr>
             {% endfor %}

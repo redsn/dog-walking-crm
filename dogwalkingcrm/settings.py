@@ -17,7 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 import environ
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env() 
 
 # Refactored path to access .env file. 
 # env.read_env(os.path.join(BASE_DIR, '.env'))
