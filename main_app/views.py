@@ -4,13 +4,14 @@ from django.shortcuts import render, redirect
 from .models import Dog, DogPhoto, ActivityPhoto, Activity
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserChangeForm
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import ActivityForm, SignUpForm
+from .forms import ActivityForm, SignUpForm, UserEditForm
+from django.urls import reverse_lazy
 
 import uuid
 import boto3
@@ -122,3 +123,11 @@ class DogDelete(LoginRequiredMixin, DeleteView):
 class ActivityDelete(LoginRequiredMixin, DeleteView):
     model = Activity
     success_url = '/dogs/'
+
+class UserEditView(LoginRequiredMixin, UpdateView):
+    form_class = UserEditForm
+    template_name = 'registration/edit_profile.html'
+    success_url = reverse_lazy('/profile')
+
+    def get_object(self):
+        return self.request.user
