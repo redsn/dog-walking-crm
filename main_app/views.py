@@ -4,13 +4,14 @@ from django.shortcuts import render, redirect
 from .models import Dog, DogPhoto, ActivityPhoto, Activity
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserChangeForm
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import ActivityForm
+from .forms import ActivityForm, SignUpForm, UserEditForm
+from django.urls import reverse_lazy
 
 import uuid
 import boto3
@@ -47,6 +48,10 @@ def dogs_detail(request, dog_id):
     return render(request, 'dogs/detail.html', {'dog': dog, 'activity_form': activity_form})
 
 @login_required
+def profile(request):
+    return render(request, 'users/profile.html')
+
+@login_required
 def add_activity(request, dog_id):
     form = ActivityForm(request.POST)
     if form.is_valid():
@@ -58,14 +63,14 @@ def add_activity(request, dog_id):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
         else: 
             error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
+    form = SignUpForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
@@ -118,3 +123,11 @@ class DogDelete(LoginRequiredMixin, DeleteView):
 class ActivityDelete(LoginRequiredMixin, DeleteView):
     model = Activity
     success_url = '/dogs/'
+
+class UserEditView(LoginRequiredMixin, UpdateView):
+    form_class = UserEditForm
+    template_name = 'registration/edit_profile.html'
+    success_url = reverse_lazy('/profile')
+
+    def get_object(self):
+        return self.request.user
