@@ -73,3 +73,14 @@ class DogPhoto(models.Model):
 class ActivityPhoto(models.Model):
     url = models.CharField(max_length=200)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100, verbose_name=('First Name'))
+    last_name = models.CharField(max_length=100, verbose_name=('Last Name'))
+    email = models.EmailField(max_length=100, verbose_name=('Email'))
+    phone = models.CharField(max_length=10, verbose_name=('Phone Number'))
+    address = models.CharField(max_length=100, verbose_name=('Address'))
+
+    def __str__(self):
+        return str(self.user)

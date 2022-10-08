@@ -9,7 +9,8 @@
 
 <form action="{% url 'signup' %}" method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ signup_form.as_p }}
+  {{ profile_form.as_p }}
   <input type="submit" class="btn" value="Ready to Wag">
 </form>
 {% endblock %}
