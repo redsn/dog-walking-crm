@@ -1,16 +1,16 @@
 
 from distutils.log import Log
 from django.shortcuts import render, redirect
-from .models import Dog, DogPhoto, ActivityPhoto, Activity
+from .models import Dog, DogPhoto, ActivityPhoto, Activity, UserProfile
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import ActivityForm, SignUpForm, UserEditForm
+from .forms import ActivityForm, SignUpForm, UserEditForm, UserProfileForm
 from django.urls import reverse_lazy
 
 import uuid
@@ -49,7 +49,8 @@ def dogs_detail(request, dog_id):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    profile = UserProfile.objects.get(user=request.user)
+    return render(request, 'users/profile.html', { 'profile': profile})
 
 @login_required
 def add_activity(request, dog_id):
@@ -63,15 +64,20 @@ def add_activity(request, dog_id):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
+        signup_form = UserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+        if signup_form.is_valid() and profile_form.is_valid():
+            user = signup_form.save()
+            new_profile = profile_form.save(commit=False)
+            new_profile.user = user
+            new_profile.save()
             login(request, user)
             return redirect('home')
         else: 
             error_message = 'Invalid sign up - try again'
-    form = SignUpForm()
-    context = {'form': form, 'error_message': error_message}
+    signup_form = UserCreationForm()
+    profile_form = UserProfileForm()
+    context = {'signup_form': signup_form, 'profile_form': profile_form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
 # Meant for a general photo upload. May need to configure settings for 'main' profile picture
@@ -135,7 +141,8 @@ class ActivityDelete(LoginRequiredMixin, DeleteView):
 class UserEditView(LoginRequiredMixin, UpdateView):
     form_class = UserEditForm
     template_name = 'registration/edit_profile.html'
-    success_url = reverse_lazy('/profile')
+    success_url = reverse_lazy('user-profile')
 
     def get_object(self):
-        return self.request.user
+        profile = UserProfile.objects.get(user=self.request.user)
+        return profile
