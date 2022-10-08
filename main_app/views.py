@@ -136,4 +136,5 @@ class UserEditView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('user-profile')
 
     def get_object(self):
-        return self.request.user
+        profile = UserProfile.objects.get(user=self.request.user)
+        return profile

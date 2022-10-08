@@ -20,14 +20,16 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
-class UserEditForm(UserChangeForm):
-    email = forms.EmailField()
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
+class UserEditForm(ModelForm):
+    first_name = forms.CharField(max_length=10)
+    last_name = forms.CharField(max_length=10)
+    email = forms.EmailField(max_length=100)
+    phone = forms.CharField(max_length=10)
+    address = forms.CharField(max_length=100)
 
     class Meta: 
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email') 
+        model = UserProfile
+        fields = ('first_name','last_name', 'email', 'phone', 'address') 
 
 class UserProfileForm(ModelForm):
     first_name = forms.CharField(max_length=10)
