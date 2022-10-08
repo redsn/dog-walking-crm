@@ -1,45 +1,42 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div>
-    <h1>{{dog.name}}</h1>
-    <a href="{% url 'dog_update' dog.id %}">Edit this Dog PLACEHOLDER</a>
-    <div>
-        <p>{{dog.breed}}</p>
-        <p>{{dog.coatcolor}}</p>
-    </div>
-    <!-- <div>
-        {% for dogphoto in dog.dogphoto_set.all %}
-        <img src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
-        {% empty %}
-        <div>This dog currently has no pictures</div>
-        {% endfor %}
+<div class="wrapper">
+<div class="sidebar white">
+<div class="card profile-side">
 
-        <form action="{% url 'add_dog_photo' dog.id %}" enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            <input type="file" name="photo_file" />
-            <br/>
-            <input type="submit" value="Upload Dog Photo">
-        </form>
-    </div> -->
     <div>
-        {% for dogphoto in dog.dogphoto_set.all %}
-        <img src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
-        {% empty %}
-        <div>This dog currently has no pictures</div>
-        <form action="{% url 'add_dog_photo' dog.id %}" enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            <input type="file" name="photo_file" />
-            <br/>
-            <input type="submit" value="Upload Dog Photo">
-        </form>
-        {% endfor %}
-
-    </div>
-    <div>
-        <h3>Notes</h3>
         <div>
-            {{dog.notes}}
+            <div>
+                
+                <h1>{{dog.name}}</h1>
+                <div class="card-image">
+                    <a href="{% url 'dog_update' dog.id %}">Edit this Dog PLACEHOLDER</a>
+                </div>
+                <div>
+                    <p>{{dog.breed}}</p>
+                    <p>{{dog.coatcolor}}</p>
+                </div>
+                <div>
+                    {% for dogphoto in dog.dogphoto_set.all %}
+                <img src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
+                {% empty %}
+                <div>This dog currently has no pictures</div>
+                <form action="{% url 'add_dog_photo' dog.id %}" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <input type="file" name="photo_file" />
+                    <br/>
+                    <input type="submit" value="Upload Dog Photo">
+                </form>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <h3>Notes</h3>
+    <div>
+        {{dog.notes}}
         </div>
     </div>
     <div>
@@ -51,8 +48,10 @@
         </div>
     </div>
 </div>
+</div>
+</div>
 <hr>
-<div>
+<div class="main_content">
     <h1>Activities</h1>
     <form action="{% url 'add_activity' dog.id %}" method="POST">
         {% csrf_token %}

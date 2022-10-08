@@ -102,3 +102,16 @@ button{
 }
 
 
+/* Dog Details */
+
+.profile-side img{
+  max-width: 5vh;
+}
+
+.profile-side h1{
+  color: red;
+}
+
+.card-image{
+  max-width: 1vh;
+}
