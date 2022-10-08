@@ -4,11 +4,12 @@
 <h1 class="text-bold"></h1>
 <div>
   <h1>Walker Profile</h1>
-  <h1>User Name: {{user.username}}</h1>
-      <h3>Contact Info</h3>
       <div>
-          <p>Name: {{user.first_name}} {{ user.last_name }}</p>
-          <p>Email: {{user.email}}</p>
+          <p>Username: {{user.username}}</p>
+          <p>Name: {{profile.first_name}} {{ profile.last_name }}</p>
+          <p>Email: {{profile.email}}</p>
+          <p>Phone: {{profile.phone}}</p>
+          <p>Address: {{profile.address}}</p>
       </div>
   </div>
 <a href="{% url 'edit_profile' %}" class="black-text text-darken-2">Edit Profile</a>
