@@ -107,13 +107,13 @@
             <div id="modal1" class="modal">
                 <div class="modal-content">
                     {% for dogphoto in dog.dogphoto_set.all %}
-                    <a href="{{dogphoto.url}}" target="_blank">
+                    <a href="{% url 'view_photo_profile' dogphoto.id %}" target="_blank">
                         <img src="{{dogphoto.url}}" alt="{{dog.name}}'s Photo">
                     </a>
                     {% endfor %}
                     {% for activity in dog.activity_set.all %}
                     {% for photo in activity.activityphoto_set.all %}
-                    <a href="{{photo.url}}">
+                    <a href="{% url 'view_photo_activity' photo.id %}" target="_blank">
                         <img src="{{photo.url}}" alt="{{dog.name}}'s Photo">
                     </a>
                     {% endfor %}
