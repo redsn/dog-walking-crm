@@ -49,8 +49,11 @@ def dogs_detail(request, dog_id):
 
 @login_required
 def profile(request):
-    profile = UserProfile.objects.get(user=request.user)
-    return render(request, 'users/profile.html', { 'profile': profile})
+    try: 
+        profile = UserProfile.objects.get(user=request.user)
+        return render(request, 'users/profile.html', { 'profile': profile})
+    except UserProfile.DoesNotExist:
+        return render(request, 'users/profile.html')
 
 @login_required
 def add_activity(request, dog_id):
@@ -136,5 +139,8 @@ class UserEditView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('user-profile')
 
     def get_object(self):
-        profile = UserProfile.objects.get(user=self.request.user)
-        return profile
+        try:
+            profile = UserProfile.objects.get(user=self.request.user)
+            return profile
+        except:
+            return None
