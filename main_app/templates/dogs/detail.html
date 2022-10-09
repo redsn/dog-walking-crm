@@ -44,7 +44,9 @@
                         <p>{{dog.notes}}</p>
                     </div>
                 </div>
-
+            </div>
+            <div class="card-action">
+                <a href="{% url 'dog_update' dog.id%}">Update Info</a>
             </div>
         </div>
     </div>
