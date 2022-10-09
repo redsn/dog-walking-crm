@@ -101,17 +101,14 @@ button{
     background-color: #3F3F3F;
 }
 
-
-/* Dog Details */
-
-.profile-side img{
-  max-width: 5vh;
+.profile-img{
+  max-width: 10vw;
 }
 
-.profile-side h1{
-  color: red;
+.activity-img{
+  max-width: 5vw;
 }
 
-.card-image{
-  max-width: 1vh;
+.see-more{
+  border: none !important;
 }
