@@ -1,136 +1,151 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div>
-    <h1>{{dog.name}}</h1>
-    <a href="{% url 'dog_update' dog.id %}">Edit this Dog PLACEHOLDER</a>
-    <div>
-        <p>{{dog.breed}}</p>
-        <p>{{dog.coatcolor}}</p>
-    </div>
-    <!-- <div>
-        {% for dogphoto in dog.dogphoto_set.all %}
-        <img src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
-        {% empty %}
-        <div>This dog currently has no pictures</div>
-        {% endfor %}
+<div class="row">
+    <div class="col s3">
+        <div class="card left">
+            <div class="card-content white">
+                
+                <h1>{{dog.name}}</h1>
 
-        <form action="{% url 'add_dog_photo' dog.id %}" enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            <input type="file" name="photo_file" />
-            <br/>
-            <input type="submit" value="Upload Dog Photo">
-        </form>
-    </div> -->
-    <div>
-        {% for dogphoto in dog.dogphoto_set.all %}
-        <img src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
-        {% empty %}
-        <div>This dog currently has no pictures</div>
-        <form action="{% url 'add_dog_photo' dog.id %}" enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            <input type="file" name="photo_file" />
-            <br/>
-            <input type="submit" value="Upload Dog Photo">
-        </form>
-        {% endfor %}
 
-    </div>
-    <div>
-        <h3>Notes</h3>
-        <div>
-            {{dog.notes}}
+                <div>
+                    {% for dogphoto in dog.dogphoto_set.all %}
+                    <img class="profile-img" src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
+                    {% empty %}
+                    <div>This dog currently has no pictures</div>
+                    <form action="{% url 'add_dog_photo' dog.id %}" enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+                        <input type="file" name="photo_file" />
+                        <br/>
+                        <input class="btn black" type="submit" value="Upload Dog Photo">
+                    </form>
+                    {% endfor %}
+                </div>
+                <div class="center-align">
+                    <p class="center-align">Breed: {{dog.breed}}</p>
+                    <p class="center-align">Coat Color: {{dog.coatcolor}}</p>
+                </div>
+                
+                <div>
+                    <h3>Owner Contact</h3>
+                    <div>
+                        <p>Name: {{dog.ownername}}</p>
+                        <p>Phone: {{dog.ownerphone}}</p>
+                        <p>Address: {{dog.owneraddress}}</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content see-more">
+                        <button class="activator btn black">See More</button>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title">Notes</span>
+                        <p>{{dog.notes}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'dog_update' dog.id%}">Update Info</a>
+            </div>
         </div>
     </div>
-    <div>
-        <h3>Owner Contact</h3>
-        <div>
-            <p>Name: {{dog.ownername}}</p>
-            <p>Phone: {{dog.ownerphone}}</p>
-            <p>Address: {{dog.owneraddress}}</p>
+    <div class="col s9">
+        <div class="card">
+            <div class="card-content">
+
+                <h1>Activities</h1>
+                <form action="{% url 'add_activity' dog.id %}" method="POST">
+                    {% csrf_token %}
+                    {{ activity_form.as_p }}
+                    <input class="btn black" type="submit" value="Add Activity">
+                </form>
+                <table class="highlight responsive-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Activity
+                            </th>
+                            <th>
+                                Photo
+                            </th>
+                            <th>
+                                Modify Data
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for activity in dog.activity_set.all %}
+                        <tr>
+                            <td>{{ activity.date }}</td>
+                            <td>{{ activity.activity}}</td>
+                            <td>
+                                <div>
+                                    {% for photo in activity.activityphoto_set.all %}
+                                    <a href="{% url 'view_photo_activity' photo.id %}" target="_blank">
+                                    <img class="activity-img" src="{{photo.url}}" alt="{{dog.name}}'s Picture">
+                                    </a>
+                                    {% empty %}
+                                    <div>This activity has no pictures...</div>
+                                    <form action="{% url 'add_activity_photo' activity.id dog.id%}" enctype="multipart/form-data" method="post">
+                                        {% csrf_token %}
+                                        <input type="file" name="activity-photo" />
+                                        <input class="btn black" type="submit" value="Add Photo">
+                                    </form>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{% url 'activity_delete' activity.id %}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div>
+                    <button class="modal-trigger btn black" data-target="modal1">Gallery</button>
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            {% for dogphoto in dog.dogphoto_set.all %}
+                            <a href="{% url 'view_photo_profile' dogphoto.id %}" target="_blank">
+                                <img src="{{dogphoto.url}}" alt="{{dog.name}}'s Photo">
+                            </a>
+                            {% endfor %}
+                            {% for activity in dog.activity_set.all %}
+                            {% for photo in activity.activityphoto_set.all %}
+                            <a href="{% url 'view_photo_activity' photo.id %}" target="_blank">
+                                <img src="{{photo.url}}" alt="{{dog.name}}'s Photo">
+                            </a>
+                            {% endfor %}
+                            {% endfor %}
+                        </div>
+                        <div class="modal-footer">
+                            <button class="modal-close btn black">
+                                    CLOSE
+                                </button>
+                            </div>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<hr>
-<div>
-    <h1>Activities</h1>
-    <form action="{% url 'add_activity' dog.id %}" method="POST">
-        {% csrf_token %}
-        {{ activity_form.as_p }}
-        <input type="submit" value="Add Activity" class="btn">
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    Date
-                </th>
-                <th>
-                    Activity
-                </th>
-                <th>
-                    Photo
-                </th>
-                <th>
-                    Modify Data
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for activity in dog.activity_set.all %}
-            <tr>
-                <td>{{ activity.date }}</td>
-                <td>{{ activity.activity}}</td>
-                <td>
-                    <div>
-                        {% for photo in activity.activityphoto_set.all %}
-                        <img src="{{photo.url}}" alt="">
-                        {% empty %}
-                        <div>This activity has no pictures...</div>
-                        <form action="{% url 'add_activity_photo' activity.id dog.id%}" enctype="multipart/form-data" method="post">
-                            {% csrf_token %}
-                            <input type="file" name="activity-photo" />
-                            <input type="submit" value="Add Photo">
-                        </form>
-                        {% endfor %}
-                    </div>
-                </td>
-                <td>
-                    <a href="{% url 'activity_delete' activity.id %}">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <div>
-        <button class="modal-trigger btn black" data-target="modal1">Gallery</button>
-            <div id="modal1" class="modal">
-                <div class="modal-content">
-                    {% for dogphoto in dog.dogphoto_set.all %}
-                    <a href="{{dogphoto.url}}" target="_blank">
-                        <img src="{{dogphoto.url}}" alt="{{dog.name}}'s Photo">
-                    </a>
-                    {% endfor %}
-                    {% for activity in dog.activity_set.all %}
-                    {% for photo in activity.activityphoto_set.all %}
-                    <a href="{{photo.url}}">
-                        <img src="{{photo.url}}" alt="{{dog.name}}'s Photo">
-                    </a>
-                    {% endfor %}
-                    {% endfor %}
-                </div>
-                <div class="modal-footer">
-                    <button class="modal-close btn black">
-                        CLOSE
-                    </button>
-                </div>
-            </div>
-    </div>
 <!-- Modal Initialization -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('.modal');
       var instances = M.Modal.init(elems, {});
+    });
+    const dateEl = document.getElementById('id_date');
+
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
     });
   </script>
 {% endblock %}

@@ -114,6 +114,14 @@ def add_activity_photo(request, activity_id, dog_id):
             print(f'Error occured while uploading')
     return redirect('dog_detail', dog_id=dog_id)
 
+def view_photo_profile(request, dogphoto_id):
+    photo = DogPhoto.objects.get(id=dogphoto_id)
+    return render(request, 'viewimage/profile.html', { 'photo': photo })
+
+def view_photo_activity(request, photo_id):
+    photo = ActivityPhoto.objects.get(id=photo_id)
+    return render(request, 'viewimage/activity.html', {'photo': photo })
+
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
     fields = ('name', 'breed', 'coatcolor', 'notes', 'ownername', 'ownerphone', 'owneraddress')

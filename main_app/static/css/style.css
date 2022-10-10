@@ -101,4 +101,15 @@ button{
     background-color: #3F3F3F;
 }
 
+.profile-img{
+  max-width: 10vw;
+  border-radius: 100vh;
+}
 
+.activity-img{
+  max-width: 5vw;
+}
+
+.see-more{
+  border: none !important;
+}
