@@ -16,6 +16,7 @@ from .forms import ActivityForm, SignUpForm, UserEditForm, UserProfileForm
 from django.urls import reverse_lazy
 import geocoder
 import folium
+from random import randint
 
 import uuid
 import boto3
@@ -52,7 +53,11 @@ def landing(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    count = len(Dog.objects.filter(user=request.user))
+    activity = len(Activity.objects.filter())
+    count_second = Dog.objects.count()
+    random = Dog.objects.all()[randint(0, count_second - 1)]
+    return render(request, 'home.html', {'count': count, 'activity': activity, 'random': random, 'name': profile})
 
 @login_required
 def dogs_index(request):

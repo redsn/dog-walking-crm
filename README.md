@@ -1,4 +1,4 @@
-## K 9 to 5
+## Wagtracker
 
 This app allows companies to streamline their processes to improve customer relationship management. 
 
@@ -10,7 +10,7 @@ This app allows companies to streamline their processes to improve customer rela
 
 - As a user, I want to track my activities with the dog. 
 
-- As a user, I want to add new dogs, edit information about the dogs and assign dogs. 
+- As a user, I want to add new dogs and edit information about these dogs.
 
 ## Technologies Used
 
@@ -18,19 +18,18 @@ This app allows companies to streamline their processes to improve customer rela
 - Python
 - HTML5
 - CSS3
-- Bootstrap
+- Materialize
 - AWS
 - Docker
+- Postgres
 
-## Wire Frame 
+## Screenshots
 
-
-## Screenshots 
-
+![alt text](main_app/images/wireframe.png)
 
 ## Getting Started
 
-
+[Click Here](https://www.google.com)
 
 ## Future Enhancements 
 
@@ -41,3 +40,7 @@ This app allows companies to streamline their processes to improve customer rela
 - As a user, I want to see a dashboard of all my activities.
 
 - As a user, I want to clock in and out for my working hours.
+
+- As a user/admin, I want to be reset my password. 
+
+- As a user, I want to chat with other walkers.
