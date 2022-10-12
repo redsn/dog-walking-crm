@@ -19,7 +19,7 @@ class Dog(models.Model):
     notes= models.TextField(max_length=250, verbose_name=('Notes'))
     ## Owner contact
     ownername= models.CharField(max_length=20, verbose_name=('Owner Name'))
-    ownerphone= models.CharField(max_length=12, verbose_name=('Owner Phone'))
+    ownerphone= models.CharField(max_length=10, verbose_name=('Owner Phone'))
          ### Should ownerADDRESS be changed to TextField?  ****
     owneraddress= models.CharField(max_length=100, verbose_name=('Owner Address'))
     ## user/walker FK
