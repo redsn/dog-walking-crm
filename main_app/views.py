@@ -142,6 +142,7 @@ def view_photo_activity(request, photo_id):
     photo = ActivityPhoto.objects.get(id=photo_id)
     return render(request, 'viewimage/activity.html', {'photo': photo })
 
+@login_required
 def map(request, dog_id):
     dog = Dog.objects.get(id=dog_id)
     address = dog.owneraddress

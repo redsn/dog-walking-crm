@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col s3">
         <div class="card left">
-            <div class="card-content white">
+            <div class="card-content white-text grey darken-4">
                 
                 <h1>{{dog.name}}</h1>
 
@@ -33,7 +33,7 @@
                         <p>Phone: {{dog.ownerphone}}</p>
                         <p>Address: {{dog.owneraddress}}</p>
                         <div class="card">
-                            <div class="card-content">
+                            <div class="card-content yellow lighten-2">
                                 {{minimap.m|safe}}
                             </div>
                         </div>
@@ -42,10 +42,10 @@
 
                 <div class="card">
                     <div class="card-content see-more">
-                        <button class="activator btn black">See More</button>
+                        <button class="activator btn black button-yellow">See More</button>
                     </div>
-                    <div class="card-reveal see-more-content">
-                        <span class="card-title">Notes</span>
+                    <div class="card-reveal see-more-content yellow lighten-2 black-text">
+                        <span class="card-title">Notes<i class="material-icons right">close</i></span>
                         <a href="{% url 'map' dog.id %}">To Map</a>
                         <p>{{dog.notes}}</p>
                     </div>
@@ -61,7 +61,7 @@
                 <form action="{% url 'add_activity' dog.id %}" method="POST">
                     {% csrf_token %}
                     {{ activity_form.as_p }}
-                    <input class="btn black" type="submit" value="Add Activity">
+                    <input class="btn black button-yellow" type="submit" value="Add Activity">
                 </form>
                 <table class="highlight responsive-table">
                     <thead>
@@ -96,20 +96,20 @@
                                     <form action="{% url 'add_activity_photo' activity.id dog.id%}" enctype="multipart/form-data" method="post">
                                         {% csrf_token %}
                                         <input type="file" name="activity-photo" />
-                                        <input class="btn black" type="submit" value="Add Photo">
+                                        <input class="btn black button-yellow" type="submit" value="Add Photo">
                                     </form>
                                     {% endfor %}
                                 </div>
                             </td>
                             <td>
-                                <a href="{% url 'activity_delete' activity.id %}">Delete</a>
+                                <a class="btn black button-red" href="{% url 'activity_delete' activity.id %}">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
                 <div>
-                    <button class="modal-trigger btn black" data-target="modal1">Gallery</button>
+                    <button class="modal-trigger btn black  button-yellow" data-target="modal1">Gallery</button>
                     <div id="modal1" class="modal">
                         <div class="modal-content">
                             {% for dogphoto in dog.dogphoto_set.all %}

@@ -114,3 +114,72 @@ button{
   max-width: 100vw;
   max-height: 100vh;
 }
+
+#id_activity{
+  padding: 0.5vw;
+}
+
+.button-yellow:hover{
+  background-color: #fff176 !important;
+  color: black;
+}
+
+.button-red:hover{
+  background-color: red !important;
+  color: white;
+}
+
+.is-today{
+  color: inherit !important;
+}
+
+.datepicker-date-display{
+  background-color: black !important;
+  color: white !important;
+}
+
+[aria-selected='true'] .datepicker-day-button{
+  background-color: black !important;
+  color: white !important;
+  border-radius: 0 !important;
+}
+
+.datepicker-cancel{
+  color: black !important;
+}
+
+.datepicker-done{
+  color: black !important;
+}
+
+.datepicker-cancel:hover{
+  background-color: #fff176 !important;
+}
+
+.datepicker-done:hover{
+  background-color:  #fff176 !important;
+}
+
+input::file-selector-button{
+  background-color: black !important;
+  color: white !important;
+  border: 0;
+  padding: 0.5vw;
+}
+
+input::file-selector-button:hover{
+  background-color: #fff176 !important;
+  color: black !important;
+}
+
+.see-more{
+  display: flex !important;
+  margin: 0 auto !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 30vh !important;
+}
+
+.see-more-content{
+  min-height: fit-content !important;
+}
