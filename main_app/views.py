@@ -125,12 +125,20 @@ def view_photo_activity(request, photo_id):
     return render(request, 'viewimage/activity.html', {'photo': photo })
 
 def map(request):
-   m = folium.Map()
-   m = m._repr_html_()
-   context = {
+    lat1 = 42.352909
+    lng1 = -71.065369
+    lat2 = 42.347490
+    lng2 = -71.062530
+    m = folium.Map(location=[lat1, lng1], zoom_start=15)
+    ## Start Location
+    folium.Marker([lat1,lng1], tooltip='Start', popup='Start Location').add_to(m)
+    ## Destination
+    folium.Marker([lat2,lng2], tooltop='Destination', popup='End Location').add_to(m)
+    m = m._repr_html_()
+    context = {
         'm': m,
-   }
-   return render(request, 'map/map.html', context )
+    }
+    return render(request, 'map/map.html', context )
 
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog

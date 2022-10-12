@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
-
+<style>
+    .mapbox{
+        max-width: 10vw;
+        max-height: 10vh;
+    }
+</style>
 {% block content %}
 <h1>data</h1>
-{{m|safe}}
+<div class="mapbox">
+    {{m|safe}}
+</div>
 {% endblock %}
