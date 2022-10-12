@@ -14,6 +14,9 @@ from .forms import ActivityForm, SignUpForm, UserEditForm, UserProfileForm
 from django.urls import reverse_lazy
 import geocoder
 import folium
+import osmnx as ox
+import networkx as nx
+import folium.plugins as plugins
 
 import uuid
 import boto3
@@ -129,14 +132,23 @@ def map(request):
     lng1 = -71.065369
     lat2 = 42.347490
     lng2 = -71.062530
+
+    find = geocoder.osm('dog')
+
+    ######### MAP ###############
     m = folium.Map(location=[lat1, lng1], zoom_start=15)
     ## Start Location
     folium.Marker([lat1,lng1], tooltip='Start', popup='Start Location').add_to(m)
     ## Destination
     folium.Marker([lat2,lng2], tooltop='Destination', popup='End Location').add_to(m)
+    loc = [(lat1,lng1), (lat2, lng2) ]
+    route_lat_lng = [[lat1,lng1],[lat2,lng2]]
+    plugins.AntPath(route_lat_lng).add_to(m)
+    # folium.PolyLine(loc, color='red', weight=15, opacity=0.8).add_to(m)
     m = m._repr_html_()
     context = {
         'm': m,
+        'find': find,
     }
     return render(request, 'map/map.html', context )
 
