@@ -5,10 +5,10 @@
         <div class="card left">
             <div class="card-content white-text grey darken-4">
                 
-                <h1>{{dog.name}}</h1>
+                <h1 class="center-align">{{dog.name}}</h1>
 
 
-                <div>
+                <div class="center-align">
                     {% for dogphoto in dog.dogphoto_set.all %}
                     <img class="profile-img" src="{{dogphoto.url}}" alt="{{dog.name}}'s photo">
                     {% empty %}
