@@ -21,5 +21,5 @@ urlpatterns = [
     path('accounts/edit/', views.UserEditView.as_view(), name='edit_profile'),
     path('landing/', views.landing, name='landing'),
     path('profile/', views.profile, name='user-profile'),
-    path('mapplaceholder/', views.map, name='map'),
+    path('map/<int:dog_id>/', views.map, name='map'),
 ]
