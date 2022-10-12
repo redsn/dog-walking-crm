@@ -20,5 +20,6 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('accounts/edit/', views.UserEditView.as_view(), name='edit_profile'),
     path('landing/', views.landing, name='landing'),
-    path('profile/', views.profile, name='user-profile')
+    path('profile/', views.profile, name='user-profile'),
+    path('map/<int:dog_id>/', views.map, name='map'),
 ]

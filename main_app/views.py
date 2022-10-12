@@ -1,5 +1,7 @@
 
+from audioop import add
 from distutils.log import Log
+from gettext import find
 from django.shortcuts import render, redirect
 from .models import Dog, DogPhoto, ActivityPhoto, Activity, UserProfile
 from django.views.generic import ListView, DetailView
@@ -12,6 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .forms import ActivityForm, SignUpForm, UserEditForm, UserProfileForm
 from django.urls import reverse_lazy
+import geocoder
+import folium
 from random import randint
 
 import uuid
@@ -20,6 +24,21 @@ import boto3
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
 BUCKET = 'sei426-dog-walker-bucket-photo'
 
+### MAP FUNCTION FOR DOG DETAIL ###
+def smallmap(dog_id):
+    dog = Dog.objects.get(id=dog_id)
+    address = dog.owneraddress
+    findaddress = geocoder.osm(address)
+    lat1 = findaddress.y
+    lng1 = findaddress.x
+    m = folium.Map(location=[lat1, lng1], zoom_start=16)
+    ##Location
+    folium.Marker([lat1,lng1], tooltip=f'{dog.name}', popup=f'{dog.owneraddress}').add_to(m)
+    m = m._repr_html_()
+    context = {
+        'm': m,
+    }
+    return context
 
 # Create your views here.
 
@@ -50,7 +69,8 @@ def dogs_index(request):
 def dogs_detail(request, dog_id):
     dog = Dog.objects.get(id=dog_id)
     activity_form = ActivityForm()
-    return render(request, 'dogs/detail.html', {'dog': dog, 'activity_form': activity_form})
+    minimap = smallmap(dog_id)
+    return render(request, 'dogs/detail.html', {'dog': dog, 'activity_form': activity_form, 'minimap': minimap})
 
 @login_required
 def profile(request):
@@ -126,6 +146,21 @@ def view_photo_profile(request, dogphoto_id):
 def view_photo_activity(request, photo_id):
     photo = ActivityPhoto.objects.get(id=photo_id)
     return render(request, 'viewimage/activity.html', {'photo': photo })
+
+def map(request, dog_id):
+    dog = Dog.objects.get(id=dog_id)
+    address = dog.owneraddress
+    findaddress = geocoder.osm(address)
+    lat1 = findaddress.y
+    lng1 = findaddress.x
+    m = folium.Map(location=[lat1, lng1], zoom_start=20)
+    ##Location
+    folium.Marker([lat1,lng1], tooltip=f'{dog.name}', popup=f'{dog.owneraddress}').add_to(m)
+    m = m._repr_html_()
+    context = {
+        'm': m,
+    }
+    return render(request, 'map/map.html', context )
 
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog

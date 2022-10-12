@@ -110,6 +110,7 @@ button{
   max-width: 5vw;
 }
 
-.see-more{
-  border: none !important;
+.mapbox{
+  max-width: 100vw;
+  max-height: 100vh;
 }

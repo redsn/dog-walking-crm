@@ -32,6 +32,11 @@
                         <p>Name: {{dog.ownername}}</p>
                         <p>Phone: {{dog.ownerphone}}</p>
                         <p>Address: {{dog.owneraddress}}</p>
+                        <div class="card">
+                            <div class="card-content">
+                                {{minimap.m|safe}}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -39,14 +44,12 @@
                     <div class="card-content see-more">
                         <button class="activator btn black">See More</button>
                     </div>
-                    <div class="card-reveal">
+                    <div class="card-reveal see-more-content">
                         <span class="card-title">Notes</span>
+                        <a href="{% url 'map' dog.id %}">To Map</a>
                         <p>{{dog.notes}}</p>
                     </div>
                 </div>
-            </div>
-            <div class="card-action">
-                <a href="{% url 'dog_update' dog.id%}">Update Info</a>
             </div>
         </div>
     </div>
