@@ -12,6 +12,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .forms import ActivityForm, SignUpForm, UserEditForm, UserProfileForm
 from django.urls import reverse_lazy
+import geocoder
+import folium
 
 import uuid
 import boto3
@@ -121,6 +123,14 @@ def view_photo_profile(request, dogphoto_id):
 def view_photo_activity(request, photo_id):
     photo = ActivityPhoto.objects.get(id=photo_id)
     return render(request, 'viewimage/activity.html', {'photo': photo })
+
+def map(request):
+   m = folium.Map()
+   m = m._repr_html_()
+   context = {
+        'm': m,
+   }
+   return render(request, 'map/map.html', context )
 
 class DogCreate(LoginRequiredMixin, CreateView):
     model = Dog
