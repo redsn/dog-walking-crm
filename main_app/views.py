@@ -53,10 +53,22 @@ def landing(request):
 
 @login_required
 def home(request):
-    count = len(Dog.objects.filter(user=request.user))
-    activity = len(Activity.objects.filter())
-    count_second = Dog.objects.count()
-    random = Dog.objects.all()[randint(0, count_second - 1)]
+    dogs_array = Dog.objects.filter(user=request.user)
+    count = len(dogs_array)
+    activity = 0
+
+    for dog in dogs_array:
+        activities = Activity.objects.filter(dog=dog.id)
+        activity += len(activities)
+
+    # activity = len(Activity.objects.filter())
+    if count > 0:
+        count_second = Dog.objects.count()
+        random = Dog.objects.all()[randint(0, count_second - 1)]
+    else: 
+        random = {
+            'name': 'No Dog'
+        }
     return render(request, 'home.html', {'count': count, 'activity': activity, 'random': random, 'name': profile})
 
 @login_required
