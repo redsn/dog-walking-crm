@@ -21,7 +21,7 @@
         <td><h6>{{dog.coatcolor}}</h6></td>
         <td><h6>{{dog.ownername}}</h6></td>
         <td><h6>{{dog.ownerphone}}</h6></td>
-        <td><h6 class="modify"><a href="{% url 'dog_update' dog.id%}"><button class='btn-small light-blue darken-2'><i class="material-icons left">edit</i>Edit</button></a></h6></td>
+        <td><h6 class="modify"><a href="{% url 'dog_update' dog.id%}"><button class='btn-small light-blue darken-2'><i class="material-icons left">edit</i>Edit</button></a></h6><h6 class="modify"><a href="{% url 'dog_delete' dog.id%}"><button class='btn-small red darken-2'><i class="material-icons left">delete</i>Delete</button></a></h6></td>
       </tr>
     {% endfor %}
     </tbody>
