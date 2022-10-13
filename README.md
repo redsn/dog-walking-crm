@@ -22,6 +22,8 @@ This app allows companies to streamline their processes to improve customer rela
 - AWS
 - Docker
 - Postgres
+- Geocoder
+- Folium
 
 ## Screenshots
 
@@ -29,7 +31,15 @@ This app allows companies to streamline their processes to improve customer rela
 
 ## Getting Started
 
-[Click Here](https://www.google.com)
+[Click Here](https://wagtracker.herokuapp.com/)
+
+## Trello
+
+[Trello](https://trello.com/b/tUW99s8N/wagtracker)
+
+## Pitch Deck
+
+[Pitch-Deck](https://docs.google.com/presentation/d/15bK9PHujylshrNctUZRR9L4fhBNe_1IYaZlNfjWn2nU/edit#slide=id.p)
 
 ## Future Enhancements 
 
