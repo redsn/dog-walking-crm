@@ -29,7 +29,7 @@ This app allows companies to streamline their processes to improve customer rela
 
 ![alt text](main_app/images/wireframe.png)
 
-![image](https://user-images.githubusercontent.com/30585039/195999902-89b9a474-08ab-4089-887e-56780ef3eb5c.png)
+
 
 
 ## Getting Started
